@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bordado Japonês — Descubra seu caminho | Mari Nonaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#E31C6F;
+    --pink-dark:#B8125A;
+    --pink-light:#FBDCE9;
+    --pink-lighter:#FDF0F5;
+    --bg:#FDF6F2;
+    --card:#FBE0EA;
+    --card-hover:#F8D0E1;
+    --ink:#2B2024;
+    --ink-soft:#8A757A;
+    --ink-faint:#B9A8AC;
+    --white:#FFFFFF;
+    --green:#2FAE6B;
+    --green-dark:#1F7A4A;
+    --shadow-sm:0 4px 14px rgba(178,20,90,.08);
+    --shadow-md:0 10px 30px rgba(178,20,90,.12);
+    --shadow-lg:0 20px 50px rgba(178,20,90,.16);
+    --shadow-card:0 10px 22px rgba(178,20,90,.14);
+    --shadow-green:0 10px 26px rgba(47,174,107,.35);
+    --shadow-green-lg:0 16px 34px rgba(47,174,107,.5);
+    --radius-lg:26px;
+    --radius-md:20px;
+    --radius-sm:14px;
+    --radius-pill:999px;
+    --font-serif:'Playfair Display', Georgia, serif;
+    --font-sans:'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --container:600px;
+    --side-pad:20px;
+    --bar-h:156px;
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  img,svg{display:block; max-width:100%;}
+  button{font-family:inherit; border:none; background:none; cursor:pointer; -webkit-appearance:none;}
+  ul{margin:0; padding:0; list-style:none;}
+  p{margin:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+
+  /* ---------- Shell ---------- */
+  .page{
+    max-width:var(--container);
+    margin:0 auto;
+    min-height:100vh;
+    position:relative;
+    background:var(--bg);
+  }
+
+  .topbar{
+    position:fixed;
+    top:0; left:50%; transform:translateX(-50%);
+    width:100%; max-width:var(--container);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    padding:14px var(--side-pad) 10px;
+    background:linear-gradient(var(--bg) 82%, transparent);
+    z-index:40;
+  }
+  .topbar-logo{
+    width:88px; height:88px; display:block; margin:0 auto;
+    filter:drop-shadow(0 4px 10px rgba(178,20,90,.2));
+  }
+  .topbar-progress-row{
+    width:100%; display:flex; align-items:center; gap:14px;
+  }
+  .topbar-progress-row.hidden{visibility:hidden;}
+  .back-btn{
+    width:34px; height:34px; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    border-radius:var(--radius-pill);
+    transition:background .15s;
+  }
+  .back-btn:hover{background:rgba(0,0,0,.04);}
+  .back-btn.invisible{visibility:hidden;}
+  .progress-track{
+    flex:1; height:6px; background:var(--pink-light);
+    border-radius:var(--radius-pill); overflow:hidden;
+  }
+  .progress-fill{
+    height:100%; width:0%; background:var(--pink);
+    border-radius:var(--radius-pill);
+    transition:width .5s cubic-bezier(.4,0,.2,1);
+  }
+
+  main#app{
+    padding:calc(var(--bar-h) + 20px) var(--side-pad) 56px;
+    min-height:100vh;
+  }
+
+  main#app.anim{animation:stepIn .36s cubic-bezier(.2,.7,.3,1) both;}
+  @keyframes stepIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Typography ---------- */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--pink-light); color:var(--pink-dark);
+    font-weight:700; font-size:12.5px; letter-spacing:.02em;
+    padding:7px 14px; border-radius:var(--radius-pill);
+    margin-bottom:16px;
+  }
+  h1,h2,h3{font-family:var(--font-serif); font-weight:600; color:var(--ink); margin:0;}
+  .headline{
+    font-size:clamp(24px,6.4vw,30px);
+    line-height:1.2;
+    letter-spacing:-.01em;
+    margin-bottom:14px;
+  }
+  .headline.center{text-align:center;}
+  .headline .accent{color:var(--pink); font-style:italic;}
+  .sub{
+    font-size:15.5px; line-height:1.55; color:var(--ink-soft);
+    max-width:52ch;
+  }
+  .sub.center{text-align:center; margin:0 auto;}
+  .hint{font-size:13px; color:var(--ink-faint); margin-top:14px; text-align:center;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:flex; align-items:center; justify-content:center;
+    width:100%; min-height:56px;
+    border-radius:var(--radius-pill);
+    font-weight:700; font-size:14.5px;
+    letter-spacing:.03em; text-transform:uppercase;
+    padding:0 22px; text-align:center;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  .btn-primary{
+    background:var(--green); color:var(--white);
+    box-shadow:var(--shadow-green);
+    animation:ctaPulse 2.4s ease-in-out infinite;
+  }
+  .btn-primary:hover{animation-play-state:paused; transform:translateY(-1px); box-shadow:var(--shadow-green-lg);}
+  .btn-primary:active{transform:translateY(0) scale(.99);}
+  .btn-primary[disabled]{opacity:.35; box-shadow:none; animation:none; pointer-events:none;}
+  @keyframes ctaPulse{
+    0%,100%{ box-shadow:var(--shadow-green); transform:scale(1); }
+    50%{ box-shadow:var(--shadow-green-lg); transform:scale(1.015); }
+  }
+  .btn-primary .arrow{margin-left:8px; font-size:16px;}
+  .btn-ghost{
+    background:transparent; color:var(--pink-dark);
+    border:1.5px solid var(--pink-light);
+  }
+  .btn-row{margin-top:22px;}
+  .btn-loading{position:relative; color:transparent !important;}
+  .btn-loading::after{
+    content:""; position:absolute; width:18px; height:18px;
+    border-radius:50%; border:2.5px solid rgba(255,255,255,.4);
+    border-top-color:#fff; animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ---------- Choice cards ---------- */
+  .choices{display:flex; flex-direction:column; gap:12px; margin-top:26px;}
+  .choice-card{
+    display:flex; align-items:center; gap:14px;
+    background:var(--card);
+    border-radius:var(--radius-md);
+    padding:14px 14px 14px 12px;
+    min-height:64px;
+    text-align:left;
+    box-shadow:var(--shadow-card);
+    transition:background .15s ease, transform .12s ease, box-shadow .15s ease;
+  }
+  .choice-card:hover{background:var(--card-hover);}
+  .choice-card:active{transform:scale(.985); box-shadow:var(--shadow-sm);}
+  .choice-card.selected{box-shadow:0 10px 22px rgba(227,28,111,.28);}
+  .choice-icon{
+    width:42px; height:42px; flex:0 0 auto;
+    background:var(--white); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:19px; box-shadow:var(--shadow-sm);
+  }
+  .choice-label{flex:1; font-weight:600; font-size:15px; line-height:1.35; color:var(--ink);}
+  .choice-check{
+    width:30px; height:30px; flex:0 0 auto;
+    border-radius:50%; border:1.6px solid var(--pink);
+    color:var(--pink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; transition:background .15s, color .15s;
+  }
+  .choice-card.multi .choice-check{border-radius:8px;}
+  .choice-card.selected{background:var(--pink);}
+  .choice-card.selected .choice-label{color:var(--white);}
+  .choice-card.selected .choice-check{background:var(--white); color:var(--pink);}
+  .choice-card.selected .choice-icon{background:rgba(255,255,255,.9);}
+
+  /* ---------- Placeholder image block ---------- */
+  .ph-image{
+    position:relative;
+    width:100%;
+    border-radius:var(--radius-lg);
+    background:linear-gradient(150deg,var(--pink-light) 0%,#f7c9dd 55%,var(--pink-light) 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; overflow:hidden;
+  }
+  .ph-image .ph-icon{font-size:38px; opacity:.85;}
+  .ph-image .ph-label{
+    font-size:11.5px; font-weight:700; color:var(--pink-dark);
+    background:rgba(255,255,255,.75); padding:5px 12px; border-radius:var(--radius-pill);
+    letter-spacing:.01em; text-align:center; max-width:88%;
+  }
+
+  /* ---------- Landing ---------- */
+  .landing-wrap{text-align:center;}
+  .landing-logo{
+    display:block; width:150px; height:150px; margin:16px auto 0;
+    border-radius:50%; object-fit:cover;
+    box-shadow:0 10px 26px rgba(178,20,90,.22), 0 0 0 4px var(--white);
+  }
+  .landing-hero-img{aspect-ratio:4/5; margin:26px 0 20px;}
+  .hero-photo{
+    width:100%; height:100%;
+    object-fit:cover; object-position:center 18%;
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
+  }
+  .landing-note{font-size:15px; color:var(--ink-soft); line-height:1.5; margin:20px 0 22px;}
+  .social-block{margin-top:44px;}
+  .social-title{font-family:var(--font-serif); font-size:20px; font-weight:600; text-align:center; margin-bottom:18px;}
+
+  /* ---------- Carousel ---------- */
+  .carousel{position:relative;}
+  .carousel-track{
+    display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding-bottom:4px; scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .t-card{
+    scroll-snap-align:center;
+    flex:0 0 100%;
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
+  }
+  .t-photo{width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center 12%; display:block;}
+  .t-body{padding:16px 18px 20px;}
+  .t-stars{color:var(--pink); font-size:14px; letter-spacing:2px; margin-bottom:8px;}
+  .t-name{font-weight:800; font-size:14.5px;}
+  .t-handle{font-size:12.5px; color:var(--ink-faint); margin-bottom:8px;}
+  .t-quote{font-size:14px; line-height:1.55; color:var(--ink-soft);}
+  .carousel-dots{display:flex; justify-content:center; gap:6px; margin-top:14px;}
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--pink-light);}
+  .dot.active{background:var(--pink); width:16px; border-radius:4px; transition:width .2s;}
+  .carousel-arrow{
+    position:absolute; top:38%; transform:translateY(-50%);
+    width:36px; height:36px; border-radius:50%;
+    background:var(--white); box-shadow:var(--shadow-sm);
+    display:flex; align-items:center; justify-content:center; color:var(--pink-dark);
+    font-size:14px; z-index:5;
+  }
+  .carousel-arrow.prev{left:-4px;}
+  .carousel-arrow.next{right:-4px;}
+
+  .gallery-scroll{
+    display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; scrollbar-width:none; margin-top:18px;
+  }
+  .gallery-scroll::-webkit-scrollbar{display:none;}
+  .gallery-item{flex:0 0 96px; cursor:pointer;}
+  .gallery-photo{
+    width:100%; aspect-ratio:1/1; object-fit:cover; display:block;
+    border-radius:16px; border:2.5px solid transparent;
+    transition:border-color .2s ease, transform .2s ease, opacity .2s ease;
+    opacity:.75;
+  }
+  .gallery-item.active .gallery-photo{border-color:var(--pink); transform:scale(1.05); opacity:1;}
+
+  /* ---------- Editorial ---------- */
+  .editorial-img{aspect-ratio:4/5; margin:18px 0 20px;}
+  .editorial-photo{
+    width:100%; height:100%;
+    object-fit:cover; object-position:center;
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
+  }
+  .editorial-cards{display:flex; flex-direction:column; gap:14px; margin:18px 0 20px;}
+  .editorial-card-img{
+    width:100%; display:block;
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
+  }
+  .editorial-p{font-size:15px; line-height:1.65; color:var(--ink); margin-bottom:14px;}
+  .highlight-list{display:flex; flex-direction:column; gap:10px; margin:20px 0 26px;}
+  .highlight-item{
+    display:flex; align-items:center; gap:10px;
+    background:var(--pink-lighter); border:1px solid var(--pink-light);
+    border-radius:var(--radius-sm); padding:12px 14px;
+    font-size:14px; font-weight:600;
+  }
+  .highlight-item .mark{color:var(--green); font-size:15px; font-weight:800;}
+
+  /* ---------- Micro diagnosis ---------- */
+  .diag-loading{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:60px 0; gap:18px;
+  }
+  .diag-dots{display:flex; gap:8px;}
+  .diag-dots span{
+    width:10px; height:10px; border-radius:50%; background:var(--pink);
+    animation:pulse 1.1s ease-in-out infinite;
+  }
+  .diag-dots span:nth-child(2){animation-delay:.15s;}
+  .diag-dots span:nth-child(3){animation-delay:.3s;}
+  @keyframes pulse{0%,80%,100%{opacity:.25; transform:scale(.8);} 40%{opacity:1; transform:scale(1);}}
+  .diag-loading-text{font-size:14.5px; color:var(--ink-soft); font-weight:600;}
+  .diag-reveal{text-align:center;}
+  .diag-body{font-size:15.5px; line-height:1.7; color:var(--ink); margin:8px 0 30px;}
+  .diag-body strong{color:var(--pink-dark);}
+
+  /* ---------- Objection ---------- */
+  .obj-img{aspect-ratio:5/4; margin:18px 0 18px;}
+  .objection-photo{
+    width:100%; height:100%;
+    object-fit:cover; object-position:center;
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
+  }
+  .badge-pink{
+    display:inline-block; background:var(--pink); color:var(--white);
+    font-family:var(--font-serif); font-style:italic; font-weight:600; font-size:20px;
+    padding:8px 26px; border-radius:var(--radius-pill); margin-bottom:16px;
+    box-shadow:0 10px 20px rgba(178,20,90,.2);
+  }
+  .obj-p{font-size:15px; line-height:1.6; color:var(--ink); margin-bottom:10px;}
+  .steps-seq{margin:22px 0 26px; display:flex; flex-direction:column; gap:0;}
+  .step-row{display:flex; gap:14px; align-items:flex-start; padding:10px 0;}
+  .step-num{
+    width:28px; height:28px; border-radius:50%; background:var(--pink-light); color:var(--pink-dark);
+    font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center;
+    flex:0 0 auto; margin-top:1px;
+  }
+  .step-row:not(:last-child){position:relative;}
+  .step-row:not(:last-child)::after{
+    content:""; position:absolute; left:13.5px; top:32px; bottom:-4px; width:1.5px;
+    background:var(--pink-light);
+  }
+  .step-text{font-size:14.5px; font-weight:600; padding-top:4px;}
+
+  /* ---------- Pre-VSL / VSL ---------- */
+  .center-wrap{text-align:center; padding-top:26px;}
+  .mari-avatar{
+    width:76px; height:76px; border-radius:50%; margin:0 auto 20px;
+    background:var(--pink-light); display:flex; align-items:center; justify-content:center;
+    font-size:26px; box-shadow:var(--shadow-sm);
+  }
+  .vsl-video-wrap{
+    position:relative; width:100%; max-width:300px; margin:26px auto 6px;
+    aspect-ratio:9/16; border-radius:var(--radius-lg); overflow:hidden;
+    background:#0f0a0c; box-shadow:var(--shadow-lg);
+  }
+  .vsl-video{width:100%; height:100%; object-fit:cover; display:block;}
+  .vsl-progress-row{
+    position:absolute; top:10px; left:10px; right:10px; height:3px;
+    background:rgba(255,255,255,.3); border-radius:var(--radius-pill);
+    overflow:hidden; z-index:3;
+  }
+  .vsl-progress-fill{
+    height:100%; width:0%; background:#fff;
+    border-radius:var(--radius-pill);
+  }
+  .vsl-mute-hint{
+    position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+    background:rgba(0,0,0,.6); color:#fff; font-size:12px; font-weight:700;
+    padding:9px 16px; border-radius:var(--radius-pill); z-index:3;
+    display:flex; align-items:center; gap:7px; white-space:nowrap;
+  }
+
+  /* ---------- Processing ---------- */
+  .proc-ring{
+    width:64px; height:64px; border-radius:50%;
+    border:4px solid var(--pink-light); border-top-color:var(--pink);
+    animation:spin 1s linear infinite; margin:0 auto 26px;
+  }
+  .proc-msg{font-size:15px; font-weight:600; color:var(--ink); min-height:24px; transition:opacity .2s;}
+
+  /* ---------- Results page ---------- */
+  .results-hero{text-align:center; padding-top:8px;}
+  .cert-block{text-align:center; margin:30px 0 8px;}
+  .cert-label{font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--pink-dark); margin-bottom:12px;}
+  .cert-photo{
+    width:100%; border-radius:var(--radius-md);
+    box-shadow:var(--shadow-md); border:1px solid var(--pink-light);
+  }
+  .cert-caption{font-size:12.5px; color:var(--ink-soft); margin-top:10px;}
+  .profile-card{
+    background:var(--white); border:1px solid var(--pink-light);
+    border-radius:var(--radius-lg); padding:22px 20px; margin:26px 0;
+    box-shadow:var(--shadow-sm); text-align:left;
+  }
+  .profile-title{
+    font-family:var(--font-sans); font-weight:800; font-size:13px; letter-spacing:.05em;
+    color:var(--pink-dark); text-transform:uppercase; margin-bottom:16px;
+  }
+  .profile-row{display:flex; justify-content:space-between; gap:14px; padding:10px 0; border-top:1px solid var(--pink-lighter);}
+  .profile-row:first-of-type{border-top:none;}
+  .profile-k{font-size:13.5px; color:var(--ink-soft); font-weight:600;}
+  .profile-v{font-size:13.5px; color:var(--ink); font-weight:700; text-align:right; max-width:58%;}
+  .reco-box{
+    background:var(--pink-lighter); border-radius:var(--radius-md); padding:16px 18px;
+    margin:8px 0 18px; font-size:14.5px; font-weight:700; color:var(--pink-dark); text-align:left;
+  }
+  .personal-note{font-size:14.5px; line-height:1.65; color:var(--ink); text-align:left; margin-bottom:12px;}
+  .transition-line{
+    font-family:var(--font-serif); font-size:19px; font-weight:600; text-align:center;
+    margin:30px 0 6px;
+  }
+
+  .section-block{margin-top:52px;}
+  .section-title{font-family:var(--font-serif); font-size:22px; font-weight:600; text-align:center; margin-bottom:20px; line-height:1.3;}
+
+  /* Offer card */
+  .offer-card{
+    background:var(--white); border-radius:28px; padding:26px 22px;
+    box-shadow:var(--shadow-lg); border:2px solid var(--pink);
+    position:relative; margin-top:14px;
+  }
+  .offer-badge{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:var(--pink); color:var(--white); font-size:11.5px; font-weight:800;
+    letter-spacing:.04em; padding:6px 16px; border-radius:var(--radius-pill); white-space:nowrap;
+  }
+  .offer-name{font-family:var(--font-serif); font-size:22px; font-weight:700; text-align:center; margin:10px 0 4px;}
+  .offer-hero-photo{
+    display:block; width:78%; max-width:280px; margin:14px auto 4px;
+  }
+  .offer-sub{font-size:13.5px; color:var(--ink-soft); text-align:center; margin-bottom:20px;}
+  .offer-list{display:flex; flex-direction:column; gap:11px; margin-bottom:22px;}
+  .offer-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4;}
+  .offer-item .mark{color:var(--green); font-weight:800; flex:0 0 auto;}
+  .offer-price-block{text-align:center; padding:18px 0 6px; border-top:1px dashed var(--pink-light);}
+  .offer-price-anchor{font-size:14px; color:var(--ink-faint); text-decoration:line-through;}
+  .offer-price-now{font-family:var(--font-serif); font-size:38px; font-weight:700; color:var(--pink-dark); line-height:1.1;}
+  .offer-price-note{font-size:12.5px; color:var(--ink-soft); margin-top:2px; margin-bottom:18px;}
+
+  /* value stack */
+  .value-stack{background:var(--pink-lighter); border-radius:var(--radius-md); padding:18px 20px; margin-top:28px;}
+  .value-lead{font-family:var(--font-serif); font-size:17px; font-weight:600; text-align:center; margin-bottom:16px;}
+  .value-row{display:flex; justify-content:space-between; font-size:13.5px; padding:7px 0; border-bottom:1px dashed rgba(178,20,90,.15);}
+  .value-row.total{font-weight:800; border-bottom:none; padding-top:12px;}
+  .value-row .k{color:var(--ink-soft);}
+  .value-row .v{font-weight:700;}
+
+  /* mini testimonials near offer */
+  .mini-t-grid{display:flex; flex-direction:column; gap:12px; margin-top:18px;}
+  .mini-t{
+    background:var(--white); border-radius:var(--radius-md); padding:16px 18px;
+    box-shadow:var(--shadow-sm); display:flex; gap:12px; align-items:flex-start;
+  }
+  .mini-t-avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--pink-light); flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; font-size:15px;
+  }
+  .mini-t-avatar-photo{
+    width:38px; height:38px; border-radius:50%; object-fit:cover; flex:0 0 auto;
+  }
+  .mini-t-name{font-weight:800; font-size:13.5px;}
+  .mini-t-stars{color:var(--pink); font-size:11px; margin:2px 0 4px;}
+  .mini-t-quote{font-size:13px; line-height:1.5; color:var(--ink-soft);}
+
+  /* guarantee */
+  .guarantee-box{
+    background:var(--white); border:1.5px solid var(--pink-light); border-radius:var(--radius-lg);
+    padding:26px 22px; text-align:center; margin-top:16px;
+  }
+  .guarantee-badge-img{
+    width:100%; max-width:340px; margin:0 auto 6px; display:block;
+  }
+  .guarantee-text{font-size:14px; line-height:1.6; color:var(--ink-soft); margin-top:6px;}
+
+  /* FAQ */
+  .faq-list{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
+  .faq-item{background:var(--white); border:1px solid var(--pink-light); border-radius:var(--radius-sm); overflow:hidden;}
+  .faq-q{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 18px; font-weight:700; font-size:14.5px; text-align:left; color:var(--ink);
+  }
+  .faq-q .chev{color:var(--pink); font-size:13px; transition:transform .2s; flex:0 0 auto;}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a-inner{padding:0 18px 16px; font-size:13.5px; line-height:1.6; color:var(--ink-soft);}
+
+  /* final cta */
+  .final-cta-block{text-align:center; margin-top:56px; padding-top:8px;}
+  .trust-line{font-size:12.5px; color:var(--ink-faint); margin-top:14px;}
+  .footer-credit{text-align:center; font-size:12px; color:var(--ink-faint); margin-top:40px; padding-bottom:10px;}
+  .legal-note{font-size:11.5px; color:var(--ink-faint); text-align:center; margin-top:18px; line-height:1.5;}
+
+  @media (min-width:640px){
+    :root{--side-pad:0;}
+    .page{padding:0 24px;}
+    .topbar{padding:0 24px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar" id="topbar">
+    <div class="topbar-progress-row" id="topbarProgressWrap">
+      <button class="back-btn" id="backBtn" aria-label="Voltar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <img class="topbar-logo" src="" id="topbarLogo" alt="Bordado Japonês">
+  </div>
+  <main id="app"></main>
+</div>
+
+<script>
+/* =========================================================
+   BORDADO JAPONÊS — QUIZ / FUNIL DE CONVERSÃO
+   Estado guardado em memória (objeto JS) durante a sessão.
+   Pronto para futura integração com Meta Pixel / GA4 — ver função track().
+   ========================================================= */
+
+/* ---------------- Tracking stub ---------------- */
+function track(eventName, payload){
+  var data = Object.assign({ event: eventName, ts: Date.now() }, payload || {});
+  console.log('[quiz-track]', data);
+  try{ if (typeof window.fbq === 'function') window.fbq('trackCustom', eventName, payload || {}); }catch(e){}
+  try{ if (typeof window.gtag === 'function') window.gtag('event', eventName, payload || {}); }catch(e){}
+  try{ if (window.dataLayer) window.dataLayer.push(data); }catch(e){}
+}
+
+/* ---------------- Assets ---------------- */
+var MARI_PHOTO = "images/mari-hero.jpg";
+var LOGO_MARK = "images/logo-mark.webp";
+var TESTIMONIAL_PHOTO_1 = "images/testimonial-01.jpg";
+var TESTIMONIAL_PHOTO_2 = "images/testimonial-02.jpg";
+var TESTIMONIAL_PHOTO_3 = "images/testimonial-03.jpg";
+var TESTIMONIAL_PHOTO_4 = "images/testimonial-04.jpg";
+var TESTIMONIAL_PHOTO_5 = "images/testimonial-05.jpg";
+var TESTIMONIAL_PHOTO_6 = "images/testimonial-06.jpg";
+var TESTIMONIAL_PHOTO_7 = "images/testimonial-07.jpg";
+var TESTIMONIAL_PHOTO_8 = "images/testimonial-08.jpg";
+var TESTIMONIAL_PHOTO_9 = "images/testimonial-09.jpg";
+var TESTIMONIAL_PHOTO_10 = "images/testimonial-10.jpg";
+var TESTIMONIAL_PHOTOS = [TESTIMONIAL_PHOTO_1, TESTIMONIAL_PHOTO_2, TESTIMONIAL_PHOTO_3, TESTIMONIAL_PHOTO_4, TESTIMONIAL_PHOTO_5, TESTIMONIAL_PHOTO_6, TESTIMONIAL_PHOTO_7, TESTIMONIAL_PHOTO_8, TESTIMONIAL_PHOTO_9, TESTIMONIAL_PHOTO_10];
+var EDITORIAL_PHOTO = "images/editorial-hands.jpg";
+var EDITORIAL_CARD_1 = "images/editorial-card-1.jpg";
+var EDITORIAL_CARD_2 = "images/editorial-card-2.jpg";
+var OBJECTION_PHOTO = "images/objection-photo.jpg";
+var OFFER_HERO_PHOTO = "images/offer-hero.webp";
+var CERTIFICATE_PHOTO = "images/certificate.jpg";
+var GUARANTEE_BADGE = "images/guarantee-badge.webp";
+var OFFER_TESTIMONIAL_PHOTO_1 = "images/offer-testimonial-01.jpg";
+var OFFER_TESTIMONIAL_PHOTO_2 = "images/offer-testimonial-02.jpg";
+var OFFER_TESTIMONIAL_PHOTO_3 = "images/offer-testimonial-03.jpg";
+
+/* ---------------- State ---------------- */
+var state = {
+  experiencia: null,
+  cursos: null,
+  tempo: null,
+  desejo: null,
+  meta: null,
+  estilos: []
+};
+
+/* ---------------- Answer option data ---------------- */
+var OPTIONS = {
+  experiencia: [
+    { v:'melhorar',      e:'😍', t:'Já faço algumas peças e quero melhorar minha técnica' },
+    { v:'novos_estilos', e:'😊', t:'Sei alguns pontos, mas quero aprender novos estilos' },
+    { v:'zero',          e:'🧵', t:'Nunca fiz e quero começar do zero' }
+  ],
+  cursos: [
+    { v:'nunca',  e:'😍', t:'Nunca fiz nenhum treinamento' },
+    { v:'um',     e:'📖', t:'Já fiz um treinamento' },
+    { v:'varios', e:'🎓', t:'Já fiz vários, mas quero aprender Bordado Japonês' }
+  ],
+  tempo: [
+    { v:'poucos_minutos', e:'⏱️', t:'Alguns minutos por dia' },
+    { v:'algumas_horas',  e:'🕐', t:'Algumas horas por semana' },
+    { v:'bastante',       e:'💗', t:'Quero aproveitar bastante meu tempo livre' }
+  ],
+  desejo: [
+    { v:'vender',   e:'💵', t:'Criar peças que eu possa vender' },
+    { v:'hobby',    e:'🕊️', t:'Ter um hobby e aproveitar melhor meu tempo' },
+    { v:'presentes',e:'🎁', t:'Criar presentes e peças especiais' },
+    { v:'decorar',  e:'🏡', t:'Decorar minha casa com algo feito por mim' },
+    { v:'relaxar',  e:'❤️', t:'Relaxar e ter um momento só meu' }
+  ],
+  meta: [
+    { v:'precificar', e:'💵', t:'Quero aprender também como precificar e vender' },
+    { v:'hobby',       e:'🧵', t:'Quero fazer principalmente como hobby' },
+    { v:'presentear',  e:'🎁', t:'Quero criar peças para mim e para presentear' },
+    { v:'ja_vende',    e:'📈', t:'Já vendo artesanato e quero adicionar um novo estilo' }
+  ],
+  estilos: [
+    { v:'sashiko',      e:'🌊', t:'Sashiko tradicional' },
+    { v:'kogin',        e:'❄️', t:'Kogin / padrões geométricos' },
+    { v:'boro',         e:'🟢', t:'Boro / peças com remendos' },
+    { v:'quadros',      e:'🖼️', t:'Quadros decorativos' },
+    { v:'almofadas',    e:'🛏️', t:'Almofadas' },
+    { v:'acessorios',   e:'👘', t:'Acessórios e peças inspiradas no Japão' },
+    { v:'toalhas',      e:'🧺', t:'Toalhas e enxoval' },
+    { v:'lembrancinhas',e:'🎁', t:'Lembrancinhas' },
+    { v:'outros',       e:'🎨', t:'Outros' },
+    { v:'todos',        e:'😍', t:'Quero aprender todos' }
+  ]
+};
+
+var LABELS = {
+  experiencia: { melhorar:'Já faz peças e quer aperfeiçoar a técnica', novos_estilos:'Sabe alguns pontos e quer aprender mais', zero:'Está começando do zero' },
+  tempo: { poucos_minutos:'Alguns minutos por dia', algumas_horas:'Algumas horas por semana', bastante:'Bastante tempo livre' },
+  desejo: { vender:'Criar peças para vender', hobby:'Ter um hobby prazeroso', presentes:'Criar presentes e peças especiais', decorar:'Decorar a casa com peças própias', relaxar:'Relaxar e ter um momento só seu' },
+  estiloMap: (function(){
+    var m = {};
+    OPTIONS.estilos.forEach(function(o){ m[o.v] = o.t; });
+    return m;
+  })()
+};
+
+/* ---------------- Flow ---------------- */
+var FLOW = ['landing','q_experiencia','q_cursos','q_tempo','editorial','q_desejo','q_meta','q_estilos','microdiag','objection','socialproof','prevsl','vsl','processing','results'];
+var PROGRESS_IDS = FLOW.filter(function(id){ return id !== 'landing' && id !== 'results'; });
+
+var currentId = 'landing';
+var historyStack = [];
+
+function goTo(id){
+  historyStack.push(currentId);
+  currentId = id;
+  renderCurrent();
+}
+function goBack(){
+  if(historyStack.length === 0) return;
+  currentId = historyStack.pop();
+  renderCurrent();
+}
+function next(id){
+  var i = FLOW.indexOf(id);
+  return FLOW[i+1];
+}
+
+/* ---------------- Mount / chrome ---------------- */
+var appEl = document.getElementById('app');
+var topbarEl = document.getElementById('topbar');
+var backBtn = document.getElementById('backBtn');
+var progressFill = document.getElementById('progressFill');
+
+backBtn.addEventListener('click', goBack);
+
+function mount(html){
+  appEl.innerHTML = html;
+  appEl.classList.remove('anim');
+  void appEl.offsetWidth;
+  appEl.classList.add('anim');
+  window.scrollTo(0,0);
+}
+
+function updateChrome(id){
+  var progressWrap = document.getElementById('topbarProgressWrap');
+  if(id === 'landing' || id === 'results'){
+    progressWrap.classList.add('hidden');
+  }else{
+    progressWrap.classList.remove('hidden');
+    var pct = ((PROGRESS_IDS.indexOf(id)+1) / PROGRESS_IDS.length) * 100;
+    progressFill.style.width = pct + '%';
+    backBtn.classList.toggle('invisible', id === 'q_experiencia' || historyStack.length === 0);
+  }
+}
+
+function renderCurrent(){
+  var html = RENDERERS[currentId]();
+  mount(html);
+  updateChrome(currentId);
+  if(AFTER[currentId]) AFTER[currentId]();
+}
+
+/* ---------------- Small helpers ---------------- */
+function phImage(label, opts){
+  opts = opts || {};
+  var icon = opts.icon || '🧵';
+  var cls = opts.cls || '';
+  return '<div class="ph-image ' + cls + '" role="img" aria-label="' + label + '">' +
+    '<span class="ph-icon">' + icon + '</span>' +
+    '<span class="ph-label">' + label + '</span>' +
+  '</div>';
+}
+
+function esc(s){ return (s || ''); }
+
+/* ---------------- Choice step renderer ---------------- */
+function renderChoiceScreen(cfg){
+  var opts = OPTIONS[cfg.key];
+  var cardsHtml = opts.map(function(o, idx){
+    return '<button class="choice-card" data-idx="' + idx + '">' +
+      '<span class="choice-icon">' + o.e + '</span>' +
+      '<span class="choice-label">' + o.t + '</span>' +
+      '<span class="choice-check">' +
+        '<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l3.5 3.5L12 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</span>' +
+    '</button>';
+  }).join('');
+
+  return '<div>' +
+    '<h1 class="headline">' + cfg.headline + '</h1>' +
+    (cfg.sub ? '<p class="sub">' + cfg.sub + '</p>' : '') +
+    '<div class="choices">' + cardsHtml + '</div>' +
+    '<p class="hint">Personalizamos o seu plano de acordo com suas respostas.</p>' +
+  '</div>';
+}
+
+function bindChoiceScreen(cfg){
+  var cards = appEl.querySelectorAll('.choice-card');
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){
+      if(card.classList.contains('selected')) return;
+      cards.forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      var idx = parseInt(card.getAttribute('data-idx'), 10);
+      var chosen = OPTIONS[cfg.key][idx];
+      state[cfg.key] = chosen.v;
+      track('quiz_answered', { question: cfg.key, value: chosen.v });
+      setTimeout(function(){ goTo(next(currentId)); }, 260);
+    });
+  });
+}
+
+/* ---------------- RENDERERS ---------------- */
+var RENDERERS = {};
+var AFTER = {};
+
+/* ---- Landing ---- */
+RENDERERS.landing = function(){
+  return '' +
+  '<div class="landing-wrap">' +
+    '<h1 class="headline center" style="font-size:clamp(25px,7.2vw,32px);">Descubra como mulheres comuns estão transformando o Bordado Japonês em uma renda extra trabalhando de casa</h1>' +
+    '<p class="sub center" style="margin-top:20px;">Responda algumas perguntas e descubra o caminho mais simples para começar do zero, criar peças lindas e aprender como transformá-las em uma renda trabalhando de casa.</p>' +
+    '<img class="landing-hero-img hero-photo" src="' + MARI_PHOTO + '" alt="Mari Nonaka segurando o guia de Bordado Japonês">' +
+    '<p class="landing-note">Vou te fazer algumas perguntas rápidas para entender seu momento e mostrar por onde você pode começar. E, se esse for o seu objetivo, também vou te mostrar como transformar suas peças em presentes, encomendas ou uma possível fonte de renda complementar.</p>' +
+    '<button class="btn btn-primary" id="landingCta">Quero descobrir meu caminho</button>' +
+    '<div class="social-block">' +
+      '<p class="social-title">Quem já começou está amando</p>' +
+      renderCarousel('landing', [0,1,2,3]) +
+    '</div>' +
+    '<p class="legal-note">Os resultados podem variar de acordo com dedicação, experiência e disponibilidade. Este conteúdo não representa garantia de ganhos financeiros.</p>' +
+    '<p class="footer-credit">Mari Nonaka · Bordados que conectam e acolhem</p>' +
+  '</div>';
+};
+AFTER.landing = function(){
+  track('quiz_started');
+  document.getElementById('landingCta').addEventListener('click', function(){
+    goTo(next('landing'));
+  });
+  bindCarousel('landing');
+};
+
+/* ---- Simple auto-advance question screens ---- */
+RENDERERS.q_experiencia = function(){
+  return renderChoiceScreen({
+    key:'experiencia',
+    headline:'Pra começar, me conta uma coisa:<br>qual é a sua experiência com <span class="accent">bordado</span>?'
+  });
+};
+AFTER.q_experiencia = function(){ bindChoiceScreen({ key:'experiencia' }); };
+
+RENDERERS.q_cursos = function(){
+  return renderChoiceScreen({
+    key:'cursos',
+    headline:'Você já tentou aprender através de algum <span class="accent">curso ou treinamento</span>?'
+  });
+};
+AFTER.q_cursos = function(){ bindChoiceScreen({ key:'cursos' }); };
+
+RENDERERS.q_tempo = function(){
+  return renderChoiceScreen({
+    key:'tempo',
+    headline:'Quanto tempo você gostaria de separar para esse novo <span class="accent">hobby</span>?'
+  });
+};
+AFTER.q_tempo = function(){ bindChoiceScreen({ key:'tempo' }); };
+
+RENDERERS.q_desejo = function(){
+  return renderChoiceScreen({
+    key:'desejo',
+    headline:'O que você mais deseja conquistar aprendendo <span class="accent">Bordado Japonês</span>?'
+  });
+};
+AFTER.q_desejo = function(){ bindChoiceScreen({ key:'desejo' }); };
+
+RENDERERS.q_meta = function(){
+  return renderChoiceScreen({
+    key:'meta',
+    headline:'Depois que você aprender os primeiros pontos, qual situação mais combina com <span class="accent">você</span>?'
+  });
+};
+AFTER.q_meta = function(){ bindChoiceScreen({ key:'meta' }); };
+
+/* ---- Multi select: estilos ---- */
+RENDERERS.q_estilos = function(){
+  var cards = OPTIONS.estilos.map(function(o, idx){
+    var selected = state.estilos.indexOf(o.v) > -1;
+    return '<button class="choice-card multi' + (selected ? ' selected' : '') + '" data-idx="' + idx + '">' +
+      '<span class="choice-icon">' + o.e + '</span>' +
+      '<span class="choice-label">' + o.t + '</span>' +
+      '<span class="choice-check">' +
+        (selected ? '<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l3.5 3.5L12 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') +
+      '</span>' +
+    '</button>';
+  }).join('');
+  return '<div>' +
+    '<h1 class="headline">Quais estilos ou peças mais chamam sua <span class="accent">atenção</span>?</h1>' +
+    '<p class="sub">Você pode escolher mais de uma opção.</p>' +
+    '<div class="choices">' + cards + '</div>' +
+    '<div class="btn-row">' +
+      '<button class="btn btn-primary" id="estilosContinue" ' + (state.estilos.length === 0 ? 'disabled' : '') + '>Continuar</button>' +
+    '</div>' +
+  '</div>';
+};
+AFTER.q_estilos = function(){
+  var cards = appEl.querySelectorAll('.choice-card');
+  var continueBtn = document.getElementById('estilosContinue');
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){
+      var idx = parseInt(card.getAttribute('data-idx'), 10);
+      var v = OPTIONS.estilos[idx].v;
+      var pos = state.estilos.indexOf(v);
+      if(pos > -1){
+        state.estilos.splice(pos,1);
+        card.classList.remove('selected');
+        card.querySelector('.choice-check').innerHTML = '';
+      }else{
+        state.estilos.push(v);
+        card.classList.add('selected');
+        card.querySelector('.choice-check').innerHTML = '<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l3.5 3.5L12 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+      continueBtn.toggleAttribute('disabled', state.estilos.length === 0);
+    });
+  });
+  continueBtn.addEventListener('click', function(){
+    track('style_selected', { estilos: state.estilos });
+    goTo(next('q_estilos'));
+  });
+};
+
+/* ---- Editorial ---- */
+RENDERERS.editorial = function(){
+  return '<div>' +
+    '<span class="eyebrow">Tendência · Artesanato</span>' +
+    '<h1 class="headline">Por que técnicas japonesas de bordado estão conquistando mulheres que buscam um hobby longe das telas e uma renda extra</h1>' +
+    '<div class="editorial-cards">' +
+      '<img class="editorial-card-img" src="' + EDITORIAL_CARD_1 + '" alt="Mega Pack Católico 3D">' +
+      '<img class="editorial-card-img" src="' + EDITORIAL_CARD_2 + '" alt="Arte Sacra 3D para sua casa">' +
+    '</div>' +
+    '<p class="editorial-p">Linhas simples, padrões geométricos e um processo repetitivo transformaram técnicas como o Sashiko em uma forma prazerosa de criar peças únicas.</p>' +
+    '<p class="editorial-p">E existe um detalhe que surpreende quem vê esses trabalhos pela primeira vez: muitos dos padrões podem ser aprendidos começando por poucos pontos essenciais.</p>' +
+    '<div class="highlight-list">' +
+      '<div class="highlight-item"><span class="mark">✓</span> Pode começar do zero</div>' +
+      '<div class="highlight-item"><span class="mark">✓</span> Projetos para diferentes níveis</div>' +
+      '<div class="highlight-item"><span class="mark">✓</span> Peças úteis e decorativas</div>' +
+    '</div>' +
+    '<button class="btn btn-primary" id="editorialCta">Descobrir qual estilo combina comigo</button>' +
+  '</div>';
+};
+AFTER.editorial = function(){
+  track('editorial_viewed');
+  document.getElementById('editorialCta').addEventListener('click', function(){ goTo(next('editorial')); });
+};
+
+/* ---- Microdiagnóstico ---- */
+RENDERERS.microdiag = function(){
+  return '<div class="diag-loading" id="diagLoading">' +
+    '<div class="diag-dots"><span></span><span></span><span></span></div>' +
+    '<p class="diag-loading-text">Já estou entendendo o seu perfil…</p>' +
+  '</div>';
+};
+AFTER.microdiag = function(){
+  var objetivoLabel = LABELS.desejo[state.desejo] || 'encontrar o seu caminho no bordado';
+  var tempoLabel = LABELS.tempo[state.tempo] || 'o tempo que você separar';
+  setTimeout(function(){
+    appEl.innerHTML = '<div class="diag-reveal">' +
+      '<div class="diag-dots" style="margin:0 auto 22px;"><span></span><span></span><span></span></div>' +
+      '<p class="diag-body">Pelas suas respostas, você procura <strong>' + objetivoLabel.toLowerCase() + '</strong> e tem <strong>' + tempoLabel.toLowerCase() + '</strong> disponível para aprender.<br><br>' +
+      'Isso significa que você não precisa começar tentando dominar dezenas de pontos.<br><br>' +
+      'Um caminho progressivo, começando por padrões simples e evoluindo peça por peça, tende a fazer muito mais sentido para você.</p>' +
+      '<button class="btn btn-primary" id="diagContinue">Continuar</button>' +
+    '</div>';
+    document.getElementById('diagContinue').addEventListener('click', function(){ goTo(next('microdiag')); });
+  }, 1300);
+};
+
+/* ---- Objection ---- */
+RENDERERS.objection = function(){
+  var seq = ['Escolha o molde','Prepare o tecido','Siga a marcação','Faça os pontos','Finalize sua primeira peça'];
+  var rows = seq.map(function(s, i){
+    return '<div class="step-row"><span class="step-num">' + (i+1) + '</span><span class="step-text">' + s + '</span></div>';
+  }).join('');
+  return '<div>' +
+    '<h1 class="headline center">Mas eu nunca bordei.<br>Será que consigo?</h1>' +
+    '<img class="obj-img objection-photo" src="' + OBJECTION_PHOTO + '" alt="Mãos bordando de perto em um bastidor">' +
+    '<div style="text-align:center;"><span class="badge-pink">SIM.</span></div>' +
+    '<p class="obj-p">Você não precisa dominar artesanato antes de começar.</p>' +
+    '<p class="obj-p">O método foi estruturado para iniciar pelos pontos essenciais, utilizar moldes como referência e evoluir gradualmente para peças mais detalhadas.</p>' +
+    '<div class="steps-seq">' + rows + '</div>' +
+    '<button class="btn btn-primary" id="objCta">Quero continuar</button>' +
+  '</div>';
+};
+AFTER.objection = function(){
+  track('objection_viewed');
+  document.getElementById('objCta').addEventListener('click', function(){ goTo(next('objection')); });
+};
+
+/* ---- Social proof ---- */
+RENDERERS.socialproof = function(){
+  return '<div>' +
+    '<h1 class="headline center">Olha o que acontece quando você começa pelas peças certas</h1>' +
+    renderCarousel('social', [4,5,6,7,8,9]) +
+    '<p class="social-title" style="margin-top:38px; font-size:17px;">Trabalhos de quem já começou</p>' +
+    renderGallery('social', [4,5,6,7,8,9]) +
+    '<div class="btn-row">' +
+      '<button class="btn btn-primary" id="socialCta">Continuar</button>' +
+    '</div>' +
+  '</div>';
+};
+AFTER.socialproof = function(){
+  track('testimonial_viewed');
+  bindCarousel('social');
+  document.getElementById('socialCta').addEventListener('click', function(){ goTo(next('socialproof')); });
+};
+
+/* ---- Pré-VSL ---- */
+RENDERERS.prevsl = function(){
+  return '<div class="center-wrap">' +
+    '<h1 class="headline center">Já entendi o que você procura.</h1>' +
+    '<p class="sub center">Antes de montar a sua recomendação, quero te mostrar rapidamente por que o Bordado Japonês pode ser muito mais simples de aprender do que parece.</p>' +
+    '<div class="btn-row"><button class="btn btn-primary" id="prevslCta">Assistir explicação</button></div>' +
+  '</div>';
+};
+AFTER.prevsl = function(){
+  document.getElementById('prevslCta').addEventListener('click', function(){ goTo(next('prevsl')); });
+};
+
+/* ---- VSL ---- */
+RENDERERS.vsl = function(){
+  return '<div>' +
+    '<h1 class="headline center">Antes de ver seu plano, assista a esta explicação rápida.</h1>' +
+    '<div class="vsl-video-wrap" id="vslVideoWrap">' +
+      '<div class="vsl-progress-row"><div class="vsl-progress-fill" id="vslProgressFill"></div></div>' +
+      '<video class="vsl-video" id="vslVideo" src="video/vsl.mp4" playsinline muted autoplay preload="auto"></video>' +
+      '<button class="vsl-mute-hint" id="vslMuteHint" aria-label="Ativar som">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M23 9l-6 6M17 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
+        'Toque para ativar o som' +
+      '</button>' +
+    '</div>' +
+    '<div class="btn-row"><button class="btn btn-primary" id="vslCta">Ver minha recomendação</button></div>' +
+  '</div>';
+};
+AFTER.vsl = function(){
+  var video = document.getElementById('vslVideo');
+  var fill = document.getElementById('vslProgressFill');
+  var muteHint = document.getElementById('vslMuteHint');
+  var milestones = { started:false, 25:false, 50:false, 75:false, completed:false };
+
+  function showMuteHint(show){
+    muteHint.style.display = show ? 'flex' : 'none';
+  }
+
+  // Tenta tocar já com som (aproveitando o clique que trouxe a pessoa até aqui).
+  // Se o navegador bloquear áudio automático, cai para mudo + aviso pra tocar.
+  video.muted = false;
+  var playPromise = video.play();
+  if(playPromise && playPromise.catch){
+    playPromise.then(function(){
+      showMuteHint(false);
+    }).catch(function(){
+      video.muted = true;
+      showMuteHint(true);
+      video.play();
+    });
+  }
+
+  muteHint.addEventListener('click', function(){
+    video.muted = false;
+    video.play();
+    showMuteHint(false);
+  });
+
+  video.addEventListener('timeupdate', function(){
+    if(!video.duration) return;
+    var pct = (video.currentTime / video.duration) * 100;
+    fill.style.width = pct + '%';
+    if(!milestones.started){ milestones.started = true; track('vsl_started'); }
+    if(pct >= 25 && !milestones[25]){ milestones[25] = true; track('vsl_25'); }
+    if(pct >= 50 && !milestones[50]){ milestones[50] = true; track('vsl_50'); }
+    if(pct >= 75 && !milestones[75]){ milestones[75] = true; track('vsl_75'); }
+  });
+  video.addEventListener('ended', function(){
+    if(!milestones.completed){ milestones.completed = true; track('vsl_completed'); }
+  });
+
+  document.getElementById('vslCta').addEventListener('click', function(){ goTo(next('vsl')); });
+};
+
+/* ---- Processing ---- */
+RENDERERS.processing = function(){
+  return '<div class="center-wrap">' +
+    '<div class="proc-ring"></div>' +
+    '<h2 style="font-family:var(--font-serif); font-size:20px; margin-bottom:14px;">Montando seu plano…</h2>' +
+    '<p class="proc-msg" id="procMsg">Analisando seu nível de experiência…</p>' +
+  '</div>';
+};
+AFTER.processing = function(){
+  var msgs = ['Analisando seu nível de experiência…','Considerando seus estilos favoritos…','Ajustando ao tempo que você tem disponível…','Preparando sua recomendação…'];
+  var i = 0;
+  var el = document.getElementById('procMsg');
+  var interval = setInterval(function(){
+    i++;
+    if(i < msgs.length){
+      el.style.opacity = 0;
+      setTimeout(function(){ el.textContent = msgs[i]; el.style.opacity = 1; }, 150);
+    }
+  }, 700);
+  setTimeout(function(){
+    clearInterval(interval);
+    goTo(next('processing'));
+  }, 2900);
+};
+
+/* ---- Results (diagnosis + offer + guarantee + faq + final cta) ---- */
+RENDERERS.results = function(){
+  var estiloLabels = state.estilos.map(function(v){ return LABELS.estiloMap[v]; }).join(', ') || '—';
+  var experienciaLabel = LABELS.experiencia[state.experiencia] || '—';
+  var desejoLabel = LABELS.desejo[state.desejo] || '—';
+  var tempoLabel = LABELS.tempo[state.tempo] || '—';
+
+  var personal = '';
+  if(state.experiencia === 'zero'){
+    personal += '<p class="personal-note">Como você está começando do zero, o caminho começa pelos fundamentos.</p>';
+  }
+  if(state.desejo === 'relaxar'){
+    personal += '<p class="personal-note">Como seu principal objetivo é ter um momento de tranquilidade, recomendamos começar por projetos simples e repetitivos.</p>';
+  }
+  if(state.desejo === 'vender' || state.meta === 'precificar' || state.meta === 'ja_vende'){
+    personal += '<p class="personal-note">Como você também demonstrou interesse em transformar as peças em uma possível fonte de renda, sua recomendação inclui os conteúdos relacionados à produção e comercialização, caso estejam incluídos no produto.</p>';
+  }
+
+  var faqData = [
+    ['Preciso saber bordar?', 'Não. O método foi pensado para quem nunca pegou em uma agulha, começando pelos pontos essenciais antes de avançar para peças mais elaboradas.'],
+    ['Preciso de máquina?', 'Não. O Bordado Japonês e o Sashiko são feitos à mão, com agulha, linha e um bastidor — sem necessidade de máquina de costura ou bordado.'],
+    ['Quais materiais vou precisar?', 'Materiais simples e fáceis de encontrar: tecido, linha, agulha e um bastidor. A lista completa e onde encontrar cada item está dentro do conteúdo.'],
+    ['Consigo acompanhar pelo celular?', 'Sim, o acesso é digital e pode ser feito pelo celular ou computador, no seu tempo.'],
+    ['Como recebo meu acesso?', '[INFORMAÇÃO A CONFIRMAR — descrever aqui o processo real de entrega de acesso após a compra]'],
+    ['Por quanto tempo terei acesso?', '[INFORMAÇÃO A CONFIRMAR — descrever aqui o prazo real de acesso]'],
+    ['Existe garantia?', 'Sim. Você conta com 7 dias de garantia de acordo com as condições apresentadas no checkout.'],
+    ['Os moldes estão incluídos?', 'Sim, a biblioteca de moldes faz parte do acesso.']
+  ];
+  var faqHtml = faqData.map(function(f, idx){
+    return '<div class="faq-item" data-idx="' + idx + '">' +
+      '<button class="faq-q">' + f[0] + '<span class="chev">▾</span></button>' +
+      '<div class="faq-a"><div class="faq-a-inner">' + f[1] + '</div></div>' +
+    '</div>';
+  }).join('');
+
+  return '<div>' +
+
+    '<div class="results-hero">' +
+      '<h1 class="headline center" style="font-size:clamp(24px,6.6vw,29px);">Seu caminho de <span class="accent">Bordado Japonês</span> está pronto!</h1>' +
+      '<p class="sub center">Com base nas suas respostas, você pode começar pelas técnicas essenciais e evoluir até as peças que mais chamaram sua atenção.</p>' +
+    '</div>' +
+
+    '<div class="cert-block">' +
+      '<p class="cert-label">Ao concluir, você recebe</p>' +
+      '<img class="cert-photo" src="' + CERTIFICATE_PHOTO + '" alt="Diploma de conclusão do curso de Bordado Japonês, assinado por Mari Nonaka">' +
+      '<p class="cert-caption">Seu diploma de conclusão, assinado por Mari Nonaka</p>' +
+    '</div>' +
+
+    '<div class="profile-card">' +
+      '<p class="profile-title">Seu perfil</p>' +
+      '<div class="profile-row"><span class="profile-k">Experiência</span><span class="profile-v">' + experienciaLabel + '</span></div>' +
+      '<div class="profile-row"><span class="profile-k">Objetivo</span><span class="profile-v">' + desejoLabel + '</span></div>' +
+      '<div class="profile-row"><span class="profile-k">Tempo disponível</span><span class="profile-v">' + tempoLabel + '</span></div>' +
+      '<div class="profile-row"><span class="profile-k">Estilos favoritos</span><span class="profile-v">' + estiloLabels + '</span></div>' +
+    '</div>' +
+
+    '<div class="reco-box">Recomendação: começar pelo Método Essencial + biblioteca de moldes.</div>' +
+    personal +
+    '<p class="transition-line">Por isso, separei a forma ideal de você começar.</p>' +
+
+    '<div class="section-block" id="offerSection">' +
+      '<div class="offer-card">' +
+        '<span class="offer-badge">Recomendado pra você</span>' +
+        '<img class="offer-hero-photo" src="' + OFFER_HERO_PHOTO + '" alt="Mari Nonaka com o guia Bordado Japonês, moldes e materiais">' +
+        '<h2 class="offer-name">Acesso Bordado Japonês</h2>' +
+        '<p class="offer-sub">Treinamento completo + biblioteca de moldes</p>' +
+        '<div class="offer-list">' +
+          '<div class="offer-item"><span class="mark">✓</span> Treinamento passo a passo, do zero às peças avançadas</div>' +
+          '<div class="offer-item"><span class="mark">✓</span> Técnicas fundamentais de Sashiko, Kogin e Boro</div>' +
+          '<div class="offer-item"><span class="mark">✓</span> Biblioteca completa de moldes</div>' +
+          '<div class="offer-item"><span class="mark">✓</span> Projetos guiados para os primeiros e para os próximos passos</div>' +
+          '<div class="offer-item"><span class="mark">✓</span> Conteúdo sobre criação de presentes e peças para casa</div>' +
+          '<div class="offer-item"><span class="mark">✓</span> Acesso pelo celular ou computador, no seu tempo</div>' +
+        '</div>' +
+        '<div class="offer-price-block">' +
+          '<div class="offer-price-anchor">De R$ 97,90</div>' +
+          '<div class="offer-price-now">R$ 37,90</div>' +
+          '<div class="offer-price-note">Pagamento único · acesso digital</div>' +
+          '<button class="btn btn-primary" id="offerCta">Quero começar com o Bordado Japonês</button>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="value-stack">' +
+        '<p class="value-lead">Você não está recebendo apenas algumas aulas.</p>' +
+        '<div class="value-row"><span class="k">Treinamento principal</span><span class="v">R$ 97,90</span></div>' +
+        '<div class="value-row"><span class="k">Biblioteca de moldes</span><span class="v">R$ 59,90</span></div>' +
+        '<div class="value-row"><span class="k">Projetos extras</span><span class="v">R$ 49,90</span></div>' +
+        '<div class="value-row"><span class="k">Bônus</span><span class="v">R$ 69,90</span></div>' +
+        '<div class="value-row total"><span class="k">Valor total</span><span class="v">R$ 277,60</span></div>' +
+        '<div class="value-row total"><span class="k">Hoje</span><span class="v" style="color:var(--pink-dark);">R$ 37,90</span></div>' +
+      '</div>' +
+
+      '<div class="mini-t-grid">' +
+        renderMiniTestimonial(null, TESTIMONIALS[4].name, TESTIMONIALS[4].quote + " — " + TESTIMONIALS[4].handle, TESTIMONIAL_PHOTOS[4]) +
+        renderMiniTestimonial(null, TESTIMONIALS[7].name, TESTIMONIALS[7].quote + " — " + TESTIMONIALS[7].handle, TESTIMONIAL_PHOTOS[7]) +
+        renderMiniTestimonial("S", "Sônia Pereira", "Minhas mãos não têm a mesma agilidade de antes e achei que isso seria um problema. Fui fazendo com calma e consegui. Isso me deu uma satisfação enorme. — São José dos Campos – SP", OFFER_TESTIMONIAL_PHOTO_1) +
+        renderMiniTestimonial("M", "Mônica Fernandes", "Comecei por curiosidade e acabei encontrando um hobby que realmente me faz bem. Até meu marido percebe quando estou bordando porque diz que fico muito mais tranquila. — Brasília – DF", OFFER_TESTIMONIAL_PHOTO_2) +
+        renderMiniTestimonial("A", "Ana Paula Mendes", "O meu medo era errar os pontos e estragar tudo. Depois entendi que não precisava começar fazendo algo perfeito. Quando terminei a primeira peça, já estava muito mais segura. — Niterói – RJ", OFFER_TESTIMONIAL_PHOTO_3) +
+      '</div>' +
+    '</div>' +
+
+    '<div class="section-block">' +
+      '<h2 class="section-title">Você pode conhecer o método com tranquilidade.</h2>' +
+      '<div class="guarantee-box">' +
+        '<img class="guarantee-badge-img" src="' + GUARANTEE_BADGE + '" alt="Selo de garantia incondicional de 7 dias, seu dinheiro de volta">' +
+        '<p class="guarantee-text">Você conta com 7 dias de garantia de acordo com as condições apresentadas no checkout.</p>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="section-block">' +
+      '<h2 class="section-title">Perguntas frequentes</h2>' +
+      '<div class="faq-list">' + faqHtml + '</div>' +
+    '</div>' +
+
+    '<div class="final-cta-block">' +
+      '<h2 class="headline center">Você já descobriu qual caminho combina com você.<br>Agora falta apenas começar sua primeira peça.</h2>' +
+      '<div class="btn-row"><button class="btn btn-primary" id="finalCta">Quero começar meu Bordado Japonês</button></div>' +
+      '<p class="trust-line">Compra segura · acesso digital · dados protegidos</p>' +
+    '</div>' +
+
+    '<p class="footer-credit">© Mari Nonaka · Bordados que conectam e acolhem</p>' +
+  '</div>';
+};
+
+function renderMiniTestimonial(initial, name, quote, photo){
+  var avatarHtml = photo
+    ? '<img class="mini-t-avatar-photo" src="' + photo + '" alt="' + name + '">'
+    : '<div class="mini-t-avatar">' + initial + '</div>';
+  return '<div class="mini-t">' +
+    avatarHtml +
+    '<div>' +
+      '<div class="mini-t-name">' + name + '</div>' +
+      '<div class="mini-t-stars">★★★★★</div>' +
+      '<div class="mini-t-quote">' + quote + '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+AFTER.results = function(){
+  track('diagnosis_viewed');
+  track('offer_viewed');
+
+  function handleCta(id, eventName){
+    var btn = document.getElementById(id);
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      track(eventName);
+      track('checkout_clicked');
+      btn.classList.add('btn-loading');
+      // TODO: substituir pelo redirecionamento real para o checkout.
+      setTimeout(function(){ btn.classList.remove('btn-loading'); }, 900);
+    });
+  }
+  handleCta('offerCta', 'essential_clicked');
+  handleCta('finalCta', 'complete_clicked');
+
+  var faqItems = appEl.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      faqItems.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+};
+
+/* ---------------- Carousel & gallery components ---------------- */
+var TESTIMONIALS = [
+  { name:"Márcia Oliveira", handle:"Campinas – SP", quote:"Eu nunca tinha bordado nada e achava que não ia ter paciência. Quando terminei minha primeira peça fiquei olhando e pensando: fui eu que fiz isso? Hoje virou meu momento preferido do dia." },
+  { name:"Rosângela Martins", handle:"Curitiba – PR", quote:"Comecei sem saber nem como preparar o tecido. A Mari explica de um jeito tão simples que fui perdendo o medo. Minha primeira peça não ficou perfeita, mas fiquei tão orgulhosa que já comecei a segunda." },
+  { name:"Cláudia Ferreira", handle:"Belo Horizonte – MG", quote:"O que mais gostei foi conseguir acompanhar no meu ritmo. Faço um pouquinho à noite e é impressionante como me ajuda a desligar a cabeça das preocupações." },
+  { name:"Sandra Almeida", handle:"Porto Alegre – RS", quote:"Eu já fazia alguns trabalhos manuais, mas nunca tinha experimentado bordado japonês. Me apaixonei pelo Sashiko. É lindo ver aqueles desenhos surgindo ponto por ponto." },
+  { name:"Luciana Ribeiro", handle:"Goiânia – GO", quote:"Entrei pensando que seria complicado porque as peças parecem muito sofisticadas. Quando comecei a seguir os moldes percebi que era muito mais simples do que imaginava." },
+  { name:"Denise Carvalho", handle:"Florianópolis – SC", quote:"Meu primeiro projeto foi um quadradinho bem simples. Quando minha filha viu, perguntou onde eu tinha comprado. Dei risada e falei: fui eu que fiz!" },
+  { name:"Vera Lúcia Santos", handle:"Salvador – BA", quote:"Tenho 61 anos e estava procurando alguma coisa nova para aprender. O bordado virou uma terapia para mim. Coloco uma música, pego minhas linhas e esqueço da hora." },
+  { name:"Patrícia Nunes", handle:"Ribeirão Preto – SP", quote:"Sempre via essas peças na internet e pensava que precisava ter muita habilidade. Descobri que começando pelo desenho certo e seguindo cada etapa fica muito mais fácil." },
+  { name:"Adriana Costa", handle:"Recife – PE", quote:"A primeira coisa que me conquistou foi o estilo das peças. Depois que comecei a fazer, gostei ainda mais do processo. É muito gostoso acompanhar o desenho aparecendo no tecido." },
+  { name:"Eliane Rodrigues", handle:"Londrina – PR", quote:"Eu já tinha comprado material de artesanato antes e acabado deixando guardado. Dessa vez realmente consegui começar. As aulas me deram uma direção e hoje já tenho várias ideias do que quero fazer." }
+];
+
+function renderCarousel(prefix, indices){
+  var cards = indices.map(function(idx, i){
+    var t = TESTIMONIALS[idx];
+    return '<div class="t-card">' +
+      '<img class="t-photo" src="' + TESTIMONIAL_PHOTOS[idx] + '" alt="Aluna mostrando peça de bordado japonês">' +
+      '<div class="t-body">' +
+        '<div class="t-stars">★★★★★</div>' +
+        '<div class="t-name">' + t.name + '</div>' +
+        '<div class="t-handle">' + t.handle + '</div>' +
+        '<p class="t-quote">' + t.quote + '</p>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  var dots = indices.map(function(_, i){
+    return '<span class="dot' + (i === 0 ? ' active' : '') + '"></span>';
+  }).join('');
+  return '<div class="carousel">' +
+    '<button class="carousel-arrow prev" id="' + prefix + 'Prev" aria-label="Anterior">‹</button>' +
+    '<div class="carousel-track" id="' + prefix + 'Track">' + cards + '</div>' +
+    '<button class="carousel-arrow next" id="' + prefix + 'Next" aria-label="Próximo">›</button>' +
+    '<div class="carousel-dots" id="' + prefix + 'Dots">' + dots + '</div>' +
+  '</div>';
+}
+
+function bindCarousel(prefix){
+  var track = document.getElementById(prefix + 'Track');
+  var prev = document.getElementById(prefix + 'Prev');
+  var next = document.getElementById(prefix + 'Next');
+  var dots = document.getElementById(prefix + 'Dots').querySelectorAll('.dot');
+  var galleryEl = document.getElementById(prefix + 'Gallery');
+  var galleryItems = galleryEl ? galleryEl.querySelectorAll('.gallery-item') : null;
+  if(!track) return;
+
+  function scrollToIndex(i){
+    track.scrollTo({ left: track.clientWidth * i, behavior:'smooth' });
+  }
+  function setActive(i){
+    dots.forEach(function(d, idx){ d.classList.toggle('active', idx === i); });
+    if(galleryItems){
+      galleryItems.forEach(function(g, idx){ g.classList.toggle('active', idx === i); });
+      var current = galleryItems[i];
+      if(current) current.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }
+  }
+  prev.addEventListener('click', function(){
+    var i = Math.round(track.scrollLeft / track.clientWidth);
+    scrollToIndex(Math.max(0, i-1));
+  });
+  next.addEventListener('click', function(){
+    var i = Math.round(track.scrollLeft / track.clientWidth);
+    scrollToIndex(Math.min(track.children.length-1, i+1));
+  });
+  track.addEventListener('scroll', function(){
+    var i = Math.round(track.scrollLeft / track.clientWidth);
+    setActive(i);
+  });
+  if(galleryItems){
+    galleryItems.forEach(function(g, idx){
+      g.addEventListener('click', function(){ scrollToIndex(idx); });
+    });
+  }
+}
+
+function renderGallery(prefix, indices){
+  var items = indices.map(function(idx, i){
+    return '<div class="gallery-item' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
+      '<img class="gallery-photo" src="' + TESTIMONIAL_PHOTOS[idx] + '" alt="Trabalho de aluna em bordado japonês">' +
+    '</div>';
+  }).join('');
+  return '<div class="gallery-scroll" id="' + prefix + 'Gallery">' + items + '</div>';
+}
+
+/* ---------------- Boot ---------------- */
+document.getElementById('topbarLogo').src = LOGO_MARK;
+renderCurrent();
+</script>
+</body>
+</html>
